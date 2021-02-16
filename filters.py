@@ -157,8 +157,24 @@ def create_filters(date=None, start_date=None, end_date=None,
         hazard = HazardousFilter(operator.eq, hazardous)
         filters.append(hazard)
 
+    class TimeFilter(AttributeFilter):
+        @classmethod
+        def get(cls, approach):
+            return approach.time.date()
 
-    return filters
+    if date != None:
+        time = TimeFilter(operator.eq, date)
+        filters.append(time)
+
+    if start_date != None:
+        start = TimeFilter(operator.ge, start_date)
+        filters.append(start)
+
+    if end_date != None:
+        end = TimeFilter(operator.le, end_date)
+        filters.append(end)
+
+        return filters
 
 
 def limit(iterator, n=None):
