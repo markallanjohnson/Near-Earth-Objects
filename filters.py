@@ -122,6 +122,32 @@ def create_filters(date=None, start_date=None, end_date=None,
         d_max = DistanceFilter(operator.le, distance_max)
         filters.append(d_max)
 
+    class VelocityFilter(AttributeFilter):
+        @classmethod
+        def get(cls, approach):
+            return approach.velocity
+
+    if velocity_min != None:
+        v_min = VelocityFilter(operator.ge, velocity_min)
+        filters.append(v_min)
+
+    if velocity_max != None:
+        v_max = VelocityFilter(operator.le, velocity_max)
+        filters.append(v_max)
+
+    class DiameterFilter(AttributeFilter):
+        @classmethod
+        def get(cls, approach):
+            return approach.neo.diameter
+
+    if diameter_min != None:
+        dia_min = DiameterFilter(operator.ge, diameter_min)
+        filters.append(dia_min)
+
+    if diameter_max != None:
+        dia_max = DiameterFilter(operator.le, distance_max)
+        filters.append(dia_max)
+
     return filters
 
 

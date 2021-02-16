@@ -121,6 +121,11 @@ class NEODatabase:
         for approach in self._approaches:
             approach_results = []
             for filter in filters:
-                approach_results.append(filter.__call__(approach))
+                try:
+                    approach_results.append(filter.__call__(approach))
+                except:
+                    approach_results.append(False)
+                else:
+                    approach_results.append(filter.__call__(approach))
             if False not in approach_results:
                 yield approach
