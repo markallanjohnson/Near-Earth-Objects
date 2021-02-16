@@ -145,7 +145,7 @@ def create_filters(date=None, start_date=None, end_date=None,
         filters.append(dia_min)
 
     if diameter_max != None:
-        dia_max = DiameterFilter(operator.le, distance_max)
+        dia_max = DiameterFilter(operator.le, diameter_max)
         filters.append(dia_max)
 
     class HazardousFilter(AttributeFilter):
