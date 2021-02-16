@@ -16,7 +16,7 @@ iterator.
 
 You'll edit this file in Tasks 3a and 3c.
 """
-import operator
+import operator, sys
 
 
 class UnsupportedCriterionError(NotImplementedError):
@@ -174,7 +174,7 @@ def create_filters(date=None, start_date=None, end_date=None,
         end = TimeFilter(operator.le, end_date)
         filters.append(end)
 
-        return filters
+    return filters
 
 
 def limit(iterator, n=None):
@@ -187,4 +187,26 @@ def limit(iterator, n=None):
     :yield: The first (at most) `n` values from the iterator.
     """
     # TODO: Produce at most `n` values from the given iterator.
-    return iterator
+    return islice(iterator, n)
+
+
+def islice(iterable, *args):
+    s = slice(*args)
+    start, stop, step = s.start or 0, s.stop or sys.maxsize, s.step or 1
+    it = iter(range(start, stop, step))
+    try:
+        nexti = next(it)
+    except StopIteration:
+        # Consume *iterable* up to the *start* position.
+        for i, element in zip(range(start), iterable):
+            pass
+        return
+    try:
+        for i, element in enumerate(iterable):
+            if i == nexti:
+                yield element
+                nexti = next(it)
+    except StopIteration:
+        # Consume to *stop*.
+        for i, element in zip(range(i + 1, stop), iterable):
+            pass
