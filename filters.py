@@ -107,7 +107,22 @@ def create_filters(date=None, start_date=None, end_date=None,
     :return: A collection of filters for use with `query`.
     """
     # TODO: Decide how you will represent your filters.
-    return ()
+    filters = []
+
+    class DistanceFilter(AttributeFilter):
+        @classmethod
+        def get(cls, approach):
+            return approach.distance
+
+    if distance_min != None:
+        d_min = DistanceFilter(operator.ge, distance_min)
+        filters.append(d_min)
+
+    if distance_max != None:
+        d_max = DistanceFilter(operator.le, distance_max)
+        filters.append(d_max)
+
+    return filters
 
 
 def limit(iterator, n=None):

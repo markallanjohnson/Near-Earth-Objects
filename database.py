@@ -119,4 +119,8 @@ class NEODatabase:
         """
         # TODO: Generate `CloseApproach` objects that match all of the filters.
         for approach in self._approaches:
-            yield approach
+            approach_results = []
+            for filter in filters:
+                approach_results.append(filter.__call__(approach))
+            if False not in approach_results:
+                yield approach
