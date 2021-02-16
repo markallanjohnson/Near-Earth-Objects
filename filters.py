@@ -148,6 +148,16 @@ def create_filters(date=None, start_date=None, end_date=None,
         dia_max = DiameterFilter(operator.le, distance_max)
         filters.append(dia_max)
 
+    class HazardousFilter(AttributeFilter):
+        @classmethod
+        def get(cls, approach):
+            return approach.neo.hazardous
+
+    if hazardous != None:
+        hazard = HazardousFilter(operator.eq, hazardous)
+        filters.append(hazard)
+
+
     return filters
 
 
