@@ -12,7 +12,7 @@ You'll edit this file in Part 4.
 """
 import csv
 import json
-from filters import limit, islice
+from filters import limit
 from database import NEODatabase
 
 db = NEODatabase()
