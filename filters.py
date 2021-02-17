@@ -115,11 +115,11 @@ def create_filters(date=None, start_date=None, end_date=None,
         def get(cls, approach):
             return approach.distance
 
-    if distance_min != None:
+    if distance_min is not None:
         d_min = DistanceFilter(operator.ge, distance_min)
         filters.append(d_min)
 
-    if distance_max != None:
+    if distance_max is not None:
         d_max = DistanceFilter(operator.le, distance_max)
         filters.append(d_max)
 
@@ -129,11 +129,11 @@ def create_filters(date=None, start_date=None, end_date=None,
         def get(cls, approach):
             return approach.velocity
 
-    if velocity_min != None:
+    if velocity_min is not None:
         v_min = VelocityFilter(operator.ge, velocity_min)
         filters.append(v_min)
 
-    if velocity_max != None:
+    if velocity_max is not None:
         v_max = VelocityFilter(operator.le, velocity_max)
         filters.append(v_max)
 
@@ -143,11 +143,11 @@ def create_filters(date=None, start_date=None, end_date=None,
         def get(cls, approach):
             return approach.neo.diameter
 
-    if diameter_min != None:
+    if diameter_min is not None:
         dia_min = DiameterFilter(operator.ge, diameter_min)
         filters.append(dia_min)
 
-    if diameter_max != None:
+    if diameter_max is not None:
         dia_max = DiameterFilter(operator.le, diameter_max)
         filters.append(dia_max)
 
@@ -157,7 +157,7 @@ def create_filters(date=None, start_date=None, end_date=None,
         def get(cls, approach):
             return approach.neo.hazardous
 
-    if hazardous != None:
+    if hazardous is not None:
         hazard = HazardousFilter(operator.eq, hazardous)
         filters.append(hazard)
 
@@ -167,15 +167,15 @@ def create_filters(date=None, start_date=None, end_date=None,
         def get(cls, approach):
             return approach.time.date()
 
-    if date != None:
+    if date is not None:
         time = TimeFilter(operator.eq, date)
         filters.append(time)
 
-    if start_date != None:
+    if start_date is not None:
         start = TimeFilter(operator.ge, start_date)
         filters.append(start)
 
-    if end_date != None:
+    if end_date is not None:
         end = TimeFilter(operator.le, end_date)
         filters.append(end)
 

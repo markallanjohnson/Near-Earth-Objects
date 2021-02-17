@@ -65,7 +65,7 @@ class NearEarthObject:
     def fullname(self):
         """Return a representation of the full name of this NEO."""
 
-        if self.name != None:
+        if self.name is not None:
             return f'{self.designation} ({self.name})'
         else:
             return f'{self.designation}'
@@ -138,7 +138,7 @@ class CloseApproach:
         formatted string that can be used in human-readable representations and
         in serialization to CSV and JSON files.
         """
-        if self.time != None:
+        if self.time is not None:
             return datetime_to_str(self.time) # build a formatted representation of the approach time.
         else:
             return self.time
