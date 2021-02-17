@@ -118,7 +118,7 @@ class CloseApproach:
         self._designation = designation
         try:
             self.time = cd_to_datetime(time)
-        except:
+        except Exception:
             self.time = None
         else:
             self.time = cd_to_datetime(time)
@@ -126,7 +126,7 @@ class CloseApproach:
         # handles distance = ""
         try:
             self.distance = float(distance)
-        except:
+        except Exception:
             self.distance = 0.0
         else:
             self.distance = float(distance)
@@ -134,7 +134,7 @@ class CloseApproach:
         # handles velocity = ""
         try:
             self.velocity = float(velocity)
-        except:
+        except Exception:
             self.velocity = 0.0
         else:
             self.velocity = float(velocity)
