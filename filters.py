@@ -106,10 +106,11 @@ def create_filters(date=None, start_date=None, end_date=None,
     :param hazardous: Whether the NEO of a matching `CloseApproach` is potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-    # TODO: Decide how you will represent your filters.
+
     filters = []
 
     class DistanceFilter(AttributeFilter):
+        """ inherits from Attribute Filter. returns distance of approach"""
         @classmethod
         def get(cls, approach):
             return approach.distance
@@ -123,6 +124,7 @@ def create_filters(date=None, start_date=None, end_date=None,
         filters.append(d_max)
 
     class VelocityFilter(AttributeFilter):
+        """ inherits from Attribute Filter. returns velocity of approach"""
         @classmethod
         def get(cls, approach):
             return approach.velocity
@@ -136,6 +138,7 @@ def create_filters(date=None, start_date=None, end_date=None,
         filters.append(v_max)
 
     class DiameterFilter(AttributeFilter):
+        """ inherits from Attribute Filter. returns diameter of approach"""
         @classmethod
         def get(cls, approach):
             return approach.neo.diameter
@@ -149,6 +152,7 @@ def create_filters(date=None, start_date=None, end_date=None,
         filters.append(dia_max)
 
     class HazardousFilter(AttributeFilter):
+        """ inherits from Attribute Filter. returns whether hazardous or not """
         @classmethod
         def get(cls, approach):
             return approach.neo.hazardous
@@ -158,6 +162,7 @@ def create_filters(date=None, start_date=None, end_date=None,
         filters.append(hazard)
 
     class TimeFilter(AttributeFilter):
+        """ inherits from Attribute Filter. returns time of approach or not """
         @classmethod
         def get(cls, approach):
             return approach.time.date()
@@ -186,11 +191,11 @@ def limit(iterator, n=None):
     :param n: The maximum number of values to produce.
     :yield: The first (at most) `n` values from the iterator.
     """
-    # TODO: Produce at most `n` values from the given iterator.
     return islice(iterator, n)
 
-
+# couldn't get islice to work so copied the code below from link referenced...
 def islice(iterable, *args):
+    """ slices iterables. see itertools.islice for more info... """
     s = slice(*args)
     start, stop, step = s.start or 0, s.stop or sys.maxsize, s.step or 1
     it = iter(range(start, stop, step))

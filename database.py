@@ -43,10 +43,9 @@ class NEODatabase:
         self._neos = neos
         self._approaches = approaches
 
-        # TODO: What additional auxiliary data structures will be useful?
         self._designation_neo_dict = {}
         self._name_neo_dict = {}
-        # TODO: Link together the NEOs and their close approaches.
+
         for neo in self._neos:
             self._designation_neo_dict[neo.designation] = neo
             if neo.name:
@@ -73,7 +72,6 @@ class NEODatabase:
         :param designation: The primary designation of the NEO to search for.
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
-        # TODO: Fetch an NEO by its primary designation.
         try:
             self._designation_neo_dict[designation]
         except:
@@ -95,7 +93,6 @@ class NEODatabase:
         :param name: The name, as a string, of the NEO to search for.
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
-        # TODO: Fetch an NEO by its name.
         try:
             self._name_neo_dict[name]
         except:
@@ -117,7 +114,6 @@ class NEODatabase:
         :param filters: A collection of filters capturing user-specified criteria.
         :return: A stream of matching `CloseApproach` objects.
         """
-        # TODO: Generate `CloseApproach` objects that match all of the filters.
         for approach in self._approaches:
             approach_results = []
             for filter in filters:
