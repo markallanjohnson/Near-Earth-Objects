@@ -32,6 +32,7 @@ class NearEarthObject:
     initialized to an empty collection, but eventually populated in the
     `NEODatabase` constructor.
     """
+
     def __init__(self,
                  designation='',
                  name=None,
@@ -67,7 +68,6 @@ class NearEarthObject:
     @property
     def fullname(self):
         """Return a representation of the full name of this NEO."""
-
         if self.name is not None:
             return f'{self.designation} ({self.name})'
         else:
@@ -75,7 +75,7 @@ class NearEarthObject:
 
     @property
     def danger(self):
-        """ Return if a NEO is or is not hazardous """
+        """Return if a NEO is or is not hazardous."""
         if self.hazardous:
             return f"potentially hazardous."
         else:
@@ -87,8 +87,7 @@ class NearEarthObject:
                  is {self.danger}"
 
     def __repr__(self):
-        """Return `repr(self)`, a computer-readable string representation of
-        this object."""
+        """Return `repr(self)` computer-readable string rep of this object."""
         return (f"NearEarthObject(designation={self.designation!r}, "
                 f"name={self.name!r}, "f"diameter={self.diameter:.3f}, "
                 f"hazardous={self.hazardous!r})")
@@ -107,6 +106,7 @@ class CloseApproach:
     private attribute, but the referenced NEO is eventually replaced in the
     `NEODatabase` constructor.
     """
+
     def __init__(self,
                  designation='',
                  time=None,
@@ -147,8 +147,7 @@ class CloseApproach:
 
     @property
     def time_str(self):
-        """Return a formatted representation of this `CloseApproach`'s approach
-        time.
+        """Return a formatted rep of this `CloseApproach`'s approach time.
 
         The value in `self.time` should be a Python `datetime` object. While a
         `datetime` object has a string representation, the default
@@ -166,6 +165,7 @@ class CloseApproach:
 
     @property
     def fullname(self):
+        """Return full name NEO."""
         return self.neo.fullname
 
     def __str__(self):
@@ -175,8 +175,7 @@ class CloseApproach:
                 f"and a velocity of {self.velocity} km/s.")
 
     def __repr__(self):
-        """Return `repr(self)`, a computer-readable string representation of
-        this object."""
+        """Return `repr(self)` computer-readable string rep of this object."""
         return (f"CloseApproach(time={self.time_str!r}, "
                 f"distance={self.distance:.2f}, "
                 f"velocity={self.velocity:.2f}, neo={self.neo!r})")

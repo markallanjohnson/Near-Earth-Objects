@@ -1,5 +1,4 @@
-"""Provide filters for querying close approaches and limit the generated
-results.
+"""Provide filters for querying close approaches and limit the gen results.
 
 The `create_filters` function produces a collection of objects that is used by
 the `query` method to generate a stream of `CloseApproach` objects that match
@@ -41,9 +40,9 @@ class AttributeFilter:
     Concrete subclasses can override the `get` classmethod to provide custom
     behavior to fetch a desired attribute from the given `CloseApproach`.
     """
+
     def __init__(self, op, value):
-        """Construct a new `AttributeFilter` from an binary predicate and a
-        reference value.
+        """Construct a new `AttributeFilter` frm bin predicate and a ref value.
 
         The reference value will be supplied as the second (right-hand side)
         argument to the operator function. For example, an `AttributeFilter`
@@ -74,6 +73,7 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """Machine readable representation of object."""
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, \
                   value={self.value})"
 
@@ -122,11 +122,11 @@ def create_filters(date=None, start_date=None, end_date=None,
     potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-
     filters = []
 
     class DistanceFilter(AttributeFilter):
-        """ inherits from Attribute Filter. returns distance of approach"""
+        """Inherits from Attribute Filter. returns distance of approach."""
+
         @classmethod
         def get(cls, approach):
             return approach.distance
@@ -140,7 +140,8 @@ def create_filters(date=None, start_date=None, end_date=None,
         filters.append(d_max)
 
     class VelocityFilter(AttributeFilter):
-        """ inherits from Attribute Filter. returns velocity of approach"""
+        """Inherits from Attribute Filter. returns velocity of approach."""
+
         @classmethod
         def get(cls, approach):
             return approach.velocity
@@ -154,7 +155,8 @@ def create_filters(date=None, start_date=None, end_date=None,
         filters.append(v_max)
 
     class DiameterFilter(AttributeFilter):
-        """ inherits from Attribute Filter. returns diameter of approach"""
+        """Inherits from Attribute Filter. returns diameter of approach."""
+
         @classmethod
         def get(cls, approach):
             return approach.neo.diameter
@@ -168,7 +170,8 @@ def create_filters(date=None, start_date=None, end_date=None,
         filters.append(dia_max)
 
     class HazardousFilter(AttributeFilter):
-        """ inherits from Attribute Filter. returns hazardous or not """
+        """Inherits from Attribute Filter. returns hazardous or not."""
+
         @classmethod
         def get(cls, approach):
             return approach.neo.hazardous
@@ -178,7 +181,8 @@ def create_filters(date=None, start_date=None, end_date=None,
         filters.append(hazard)
 
     class TimeFilter(AttributeFilter):
-        """ inherits from Attribute Filter. returns time of approach or not """
+        """Inherits from Attribute Filter. returns time of approach or not."""
+
         @classmethod
         def get(cls, approach):
             return approach.time.date()
