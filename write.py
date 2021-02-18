@@ -19,17 +19,20 @@ db = NEODatabase()
 cas = db._approaches
 
 
-def write_to_csv(results= limit(cas), filename='data/neos_write.csv'):
+def write_to_csv(results=limit(cas), filename='data/neos_write.csv'):
     """Write an iterable of `CloseApproach` objects to a CSV file.
 
-    The precise output specification is in `README.md`. Roughly, each output row
-    corresponds to the information in a single close approach from the `results`
-    stream and its associated near-Earth object.
+    The precise output specification is in `README.md`. Roughly, each output
+    row corresponds to the information in a single close approach from the
+    `results` stream and its associated near-Earth object.
 
     :param results: An iterable of `CloseApproach` objects.
-    :param filename: A Path-like object pointing to where the data should be saved.
+    :param filename: A Path-like object pointing to where the data should be
+    saved.
     """
-    fieldnames = ('datetime_utc', 'distance_au', 'velocity_km_s', 'designation', 'name', 'diameter_km', 'potentially_hazardous')
+    fieldnames = ('datetime_utc', 'distance_au', 'velocity_km_s',
+                  'designation', 'name', 'diameter_km',
+                  'potentially_hazardous')
 
     with open(filename, 'w') as outfile:
         writer = csv.writer(outfile)
@@ -43,16 +46,18 @@ def write_to_csv(results= limit(cas), filename='data/neos_write.csv'):
                              row.neo.diameter,
                              row.neo.hazardous))
 
-def write_to_json(results= limit(cas), filename='data/cad_write.json'):
+
+def write_to_json(results=limit(cas), filename='data/cad_write.json'):
     """Write an iterable of `CloseApproach` objects to a JSON file.
 
-    The precise output specification is in `README.md`. Roughly, the output is a
-    list containing dictionaries, each mapping `CloseApproach` attributes to
+    The precise output specification is in `README.md`. Roughly, the output is
+    a list containing dictionaries, each mapping `CloseApproach` attributes to
     their values and the 'neo' key mapping to a dictionary of the associated
     NEO's attributes.
 
     :param results: An iterable of `CloseApproach` objects.
-    :param filename: A Path-like object pointing to where the data should be saved.
+    :param filename: A Path-like object pointing to where the data should be
+    saved.
     """
     with open(filename, 'w') as outfile:
         daters = []
@@ -69,5 +74,3 @@ def write_to_json(results= limit(cas), filename='data/cad_write.json'):
                         }
             daters.append(neo_dict)
         json.dump(daters, outfile)
-
-write_to_json()
